@@ -2,7 +2,8 @@
     "name": "yeebase/graylog",
     "type": "typo3-flow-package",
     "description": "Graylog exception handler for TYPO3 Flow/Neos Flow",
-    "version": "0.1.1",
+    "version": "0.1.2",
+    "license": "MIT",
     "require": {
         "typo3/flow": "*",
         "graylog2/gelf-php": "~1.0"
