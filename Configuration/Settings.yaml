@@ -1,0 +1,15 @@
+---
+## Graylog server options
+#Yeebase:
+#  Graylog:
+#    host: '127.0.0.1'
+#    port: 12201
+#    chunksize: 'wan'
+#    skipStatusCodes: [403, 404]
+#
+## Optional: Register GraylogExceptionHandler
+#TYPO3:
+#  Flow:
+#    error:
+#      exceptionHandler:
+#        className: 'Yeebase\Graylog\Error\GraylogExceptionHandler'

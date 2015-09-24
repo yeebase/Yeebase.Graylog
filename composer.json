@@ -1,0 +1,15 @@
+{
+    "name": "yeebase/graylog",
+    "type": "typo3-flow-package",
+    "description": "Graylog exception handler for TYPO3 Flow/Neos Flow",
+    "version": "0.1.1",
+    "require": {
+        "typo3/flow": "*",
+        "graylog2/gelf-php": "~1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Yeebase\\Graylog": "Classes"
+        }
+    }
+}
