@@ -23,7 +23,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler {
 	 * @param \Exception $exception
 	 * @return void
 	 */
-	protected function echoExceptionWeb(\Exception $exception) {
+	protected function echoExceptionWeb($exception) {
 		if ($this->graylogService === NULL) {
 			$this->graylogService = new GraylogService();
 		}
@@ -35,7 +35,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler {
 	 * @param \Exception $exception The exception
 	 * @return void
 	 */
-	protected function echoExceptionCli(\Exception $exception) {
+	protected function echoExceptionCli($exception) {
 		if ($this->graylogService === NULL) {
 			$this->graylogService = new GraylogService();
 		}
