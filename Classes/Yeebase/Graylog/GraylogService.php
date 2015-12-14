@@ -97,7 +97,7 @@ class GraylogService {
 
 		// build message context
 		$messageContext = array(
-			'full_message' => $exception->getTraceAsString(),
+			'exception' => $exception,
 			'reference_code' => $exception instanceof FlowException ? $exception->getReferenceCode() : NULL,
 			'response_status' => $statusCode,
 			'short_message' => sprintf('%d %s', $statusCode, Response::getStatusMessageByCode($statusCode)),
