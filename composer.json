@@ -5,8 +5,8 @@
     "version": "0.1.2",
     "license": "MIT",
     "require": {
-        "typo3/flow": "*",
-        "graylog2/gelf-php": "~1.0"
+        "typo3/flow": "~3.2",
+        "graylog2/gelf-php": "~1.5"
     },
     "autoload": {
         "psr-0": {
