@@ -16,7 +16,11 @@ TYPO3:
     error:
       exceptionHandler:
         className: 'Yeebase\Graylog\Error\GraylogExceptionHandler'
-        host: '127.0.0.1'
-        port: 12201
-        chunkSize: wan
+
+Yeebase:
+  Graylog:
+    host: '127.0.0.1'
+    port: 12201
+    chunksize: 'wan'
+    skipStatusCodes: [403, 404]
 ```
