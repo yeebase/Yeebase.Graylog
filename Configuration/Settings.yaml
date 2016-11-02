@@ -7,6 +7,12 @@
 #    chunksize: 'wan'
 #    skipStatusCodes: [403, 404]
 #
+#    Logger:
+#      backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+#      backendOptions:
+#        severityThreshold: '%LOG_INFO%'
+#        logIpAddress: TRUE
+
 ## Optional: Register GraylogExceptionHandler
 #TYPO3:
 #  Flow:
