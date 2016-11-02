@@ -8,8 +8,8 @@
         "graylog2/gelf-php": "~1.5"
     },
     "autoload": {
-        "psr-0": {
-            "Yeebase\\Graylog": "Classes"
+        "psr-4": {
+            "Yeebase\\Graylog\\": "Classes"
         }
     }
 }
