@@ -66,31 +66,15 @@ class GraylogService
      */
     public function logException(\Exception $exception)
     {
-        if (!isset($this->settings['host']) || strlen($this->settings['host']) === 0) {
-            return;
-        }
         $statusCode = NULL;
         if ($exception instanceof FlowException) {
             $statusCode = $exception->getStatusCode();
         }
+
         // skip exceptions with status codes matching "skipStatusCodes" setting
         if (isset($this->settings['skipStatusCodes']) && in_array($statusCode, $this->settings['skipStatusCodes'])) {
             return;
         }
-        $host = $this->settings['host'];
-        $port = isset($this->settings['port']) ? $this->settings['port'] : UdpTransport::DEFAULT_PORT;
-
-        // set chunk size option to wan (default) or lan
-        if (isset($this->settings['chunksize']) && strtolower($this->settings['chunksize']) === 'lan') {
-            $chunkSize = UdpTransport::CHUNK_SIZE_LAN;
-        } else {
-            $chunkSize = UdpTransport::CHUNK_SIZE_WAN;
-        }
-
-        // setup connection to graylog server
-        $transport = new UdpTransport($host, $port, $chunkSize);
-        $publisher = new Publisher();
-        $publisher->addTransport($transport);
 
         // set logLevel depending on http status code
         $logLevel = 4; // warning
@@ -108,6 +92,7 @@ class GraylogService
             'file' => $exception->getFile(),
             'line' => $exception->getLine()
         );
+
         if ($this->securityContext !== NULL && $this->securityContext->isInitialized()) {
             $account = $this->securityContext->getAccount();
             if ($account !== NULL) {
@@ -144,8 +129,43 @@ class GraylogService
             }
         }
 
+        $this->logMessageToGraylogServer($exception->getMessage(), $messageContext, $logLevel);
+    }
+
+    /**
+     * @param $rawMessage
+     * @param array $messageContext
+     * @param int $logLevel
+     */
+    public function logMessage($rawMessage, array $messageContext, $logLevel = LOG_INFO)
+    {
+        $this->logMessageToGraylogServer($rawMessage, $messageContext, $logLevel);
+    }
+
+    protected function logMessageToGraylogServer($rawMessage, $messageContext, $logLevel = LOG_INFO)
+    {
+        if (!isset($this->settings['host']) || strlen($this->settings['host']) === 0) {
+            return;
+        }
+
+        $host = $this->settings['host'];
+        $port = isset($this->settings['port']) ? $this->settings['port'] : UdpTransport::DEFAULT_PORT;
+
+        // set chunk size option to wan (default) or lan
+        if (isset($this->settings['chunksize']) && strtolower($this->settings['chunksize']) === 'lan') {
+            $chunkSize = UdpTransport::CHUNK_SIZE_LAN;
+        } else {
+            $chunkSize = UdpTransport::CHUNK_SIZE_WAN;
+        }
+
+        // setup connection to graylog server
+        $transport = new UdpTransport($host, $port, $chunkSize);
+        $publisher = new Publisher();
+        $publisher->addTransport($transport);
+
         // send message to graylog server
         $logger = new Logger($publisher);
-        $logger->log($logLevel, $exception->getMessage(), $messageContext);
+        $logger->log($logLevel, $rawMessage, $messageContext);
     }
+
 }
