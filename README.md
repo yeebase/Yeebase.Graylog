@@ -32,22 +32,24 @@ TYPO3:
         className: 'Yeebase\Graylog\Error\GraylogExceptionHandler'
 ```
 
-To use log messages of Flows Logger classes configure your logger to use our backend in your Objects.yaml. The 
-Graylog backend behaves the same way the other backends do.
+If you wish to log normal log messages to your Graylog server just use the provided GraylogLoggerInterface:
 
 ```yaml
-Some\Vendor\Class:
-  properties:
-    logger:
-      object:
-        factoryObjectName: TYPO3\Flow\Log\LoggerFactory
-        arguments:
-          1:
-            value: 'Graylog'
-          2:
-            value: 'TYPO3\Flow\Log\Logger'
-          3:
-            setting: Yeebase.Graylog.Logger.backend
-          4:
-            setting: Yeebase.Graylog.Logger.backendOptions
+
+use TYPO3\Flow\Annotations as Flow;
+
+class SomeClass 
+{
+    /**
+     * @Flow\Inject
+     * @var Yeebase\Graylog\Log\GraylogLoggerInterface
+     */
+    protected $graylogLogger;
+
+    public function yourMethod()
+    {
+      $this->graylogLogger->log('Your Message')
+    }
+}
+
 ```
