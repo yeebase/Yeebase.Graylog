@@ -61,10 +61,10 @@ class GraylogService
     }
 
     /**
-     * @param \Exception $exception
+     * @param \Exception||\Throwable $exception
      * @return void
      */
-    public function logException(\Exception $exception)
+    public function logException($exception)
     {
         $statusCode = NULL;
         if ($exception instanceof FlowException) {

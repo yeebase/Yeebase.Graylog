@@ -21,7 +21,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
     protected $graylogService;
 
     /**
-     * @param \Exception $exception
+     * @param \Exception|\Throwable $exception
      * @return void
      */
     protected function echoExceptionWeb($exception)
@@ -34,7 +34,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
     }
 
     /**
-     * @param \Exception $exception The exception
+     * @param \Exception|\Throwable $exception The exception
      * @return void
      */
     protected function echoExceptionCli($exception)
