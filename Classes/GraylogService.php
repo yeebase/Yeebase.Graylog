@@ -17,8 +17,8 @@ use Neos\Flow\Http\Response;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\Security\Context;
-use TYPO3\Party\Domain\Model\Person;
-use TYPO3\Party\Domain\Service\PartyService;
+use Neos\Party\Domain\Model\Person;
+use Neos\Party\Domain\Service\PartyService;
 
 /**
  * Service that can be used to report exceptions to a Graylog server using the official gelf-php library
