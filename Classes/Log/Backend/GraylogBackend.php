@@ -6,12 +6,12 @@ namespace Yeebase\Graylog\Log\Backend;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Log\Backend\AbstractBackend;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Log\Backend\AbstractBackend;
 use Yeebase\Graylog\GraylogService;
 
 /**
- * Backend that can be used for Logger that implement TYPO3\Flow\Log\LoggerInterface
+ * Backend that can be used for Logger that implement Neos\Flow\Log\LoggerInterface
  */
 class GraylogBackend extends AbstractBackend
 {

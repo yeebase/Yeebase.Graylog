@@ -6,17 +6,17 @@ namespace Yeebase\Graylog;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Gelf\Publisher;
 use Gelf\Logger;
 use Gelf\Transport\UdpTransport;
-use TYPO3\Flow\Core\Bootstrap;
-use TYPO3\Flow\Exception as FlowException;
-use TYPO3\Flow\Http\HttpRequestHandlerInterface;
-use TYPO3\Flow\Http\Response;
-use TYPO3\Flow\ObjectManagement\ObjectManagerInterface;
-use TYPO3\Flow\Persistence\PersistenceManagerInterface;
-use TYPO3\Flow\Security\Context;
+use Neos\Flow\Core\Bootstrap;
+use Neos\Flow\Exception as FlowException;
+use Neos\Flow\Http\HttpRequestHandlerInterface;
+use Neos\Flow\Http\Response;
+use Neos\Flow\ObjectManagement\ObjectManagerInterface;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
+use Neos\Flow\Security\Context;
 use TYPO3\Party\Domain\Model\Person;
 use TYPO3\Party\Domain\Service\PartyService;
 

@@ -6,7 +6,7 @@ namespace Yeebase\Graylog\Error;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Error\ProductionExceptionHandler;
+use Neos\Flow\Error\ProductionExceptionHandler;
 use Yeebase\Graylog\GraylogService;
 
 /**
