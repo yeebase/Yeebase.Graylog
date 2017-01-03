@@ -25,7 +25,7 @@ Yeebase:
 Activate the exception handler and configure the connection to your graylog server in your Settings.yaml:
 
 ```yaml
-TYPO3:
+Neos:
   Flow:
     error:
       exceptionHandler:
