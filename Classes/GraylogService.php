@@ -2,7 +2,7 @@
 namespace Yeebase\Graylog;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Yeebase.Graylog".      *
+ * This script belongs to the Flow package "Yeebase.Graylog".             *
  *                                                                        *
  *                                                                        */
 
@@ -66,7 +66,7 @@ class GraylogService
      */
     public function logException($exception)
     {
-        $statusCode = NULL;
+        $statusCode = null;
         if ($exception instanceof FlowException) {
             $statusCode = $exception->getStatusCode();
         }
@@ -85,7 +85,7 @@ class GraylogService
         // build message context
         $messageContext = array(
             'exception' => $exception,
-            'reference_code' => $exception instanceof FlowException ? $exception->getReferenceCode() : NULL,
+            'reference_code' => $exception instanceof FlowException ? $exception->getReferenceCode() : null,
             'response_status' => $statusCode,
             'short_message' => sprintf('%d %s', $statusCode, Response::getStatusMessageByCode($statusCode)),
             'code' => $exception->getCode(),
@@ -93,9 +93,9 @@ class GraylogService
             'line' => $exception->getLine()
         );
 
-        if ($this->securityContext !== NULL && $this->securityContext->isInitialized()) {
+        if ($this->securityContext !== null && $this->securityContext->isInitialized()) {
             $account = $this->securityContext->getAccount();
-            if ($account !== NULL) {
+            if ($account !== null) {
                 $messageContext['authenticated_account'] = $account->getAccountIdentifier() . ' (' . $this->persistenceManager->getIdentifierByObject($account) . ')';
                 $messageContext['authenticated_roles'] = implode(', ', array_keys($this->securityContext->getRoles()));
                 if ($this->objectManager->isRegistered(PartyService::class)) {
@@ -167,5 +167,4 @@ class GraylogService
         $logger = new Logger($publisher);
         $logger->log($logLevel, $rawMessage, $messageContext);
     }
-
 }

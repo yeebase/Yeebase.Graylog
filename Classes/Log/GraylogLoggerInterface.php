@@ -2,7 +2,7 @@
 namespace Yeebase\Graylog\Log;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Yeebase.Graylog".       *
+ * This script belongs to the Flow package "Yeebase.Graylog".             *
  *                                                                        *
  *                                                                        */
 

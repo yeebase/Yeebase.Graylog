@@ -2,7 +2,7 @@
 namespace Yeebase\Graylog\Log\Backend;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Yeebase.Graylog".       *
+ * This script belongs to the Flow package "Yeebase.Graylog".             *
  *                                                                        *
  *                                                                        */
 
@@ -77,5 +77,4 @@ class GraylogBackend extends AbstractBackend
     public function close()
     {
     }
-
 }
