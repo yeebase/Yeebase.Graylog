@@ -2,7 +2,7 @@
 namespace Yeebase\Graylog\Error;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Yeebase.Graylog".       *
+ * This script belongs to the Flow package "Yeebase.Graylog".             *
  *                                                                        *
  *                                                                        */
 
@@ -26,7 +26,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
      */
     protected function echoExceptionWeb($exception)
     {
-        if ($this->graylogService === NULL) {
+        if ($this->graylogService === null) {
             $this->graylogService = new GraylogService();
         }
         $this->graylogService->logException($exception);
@@ -39,7 +39,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
      */
     protected function echoExceptionCli($exception)
     {
-        if ($this->graylogService === NULL) {
+        if ($this->graylogService === null) {
             $this->graylogService = new GraylogService();
         }
         $this->graylogService->logException($exception);

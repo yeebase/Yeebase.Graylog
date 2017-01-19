@@ -14,7 +14,7 @@ Yeebase:
         logIpAddress: TRUE
 
 ## Optional: Register GraylogExceptionHandler
-#TYPO3:
+#Neos:
 #  Flow:
 #    error:
 #      exceptionHandler:
