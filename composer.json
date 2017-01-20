@@ -4,7 +4,7 @@
     "description": "Graylog exception handler for Neos Flow",
     "license": "MIT",
     "require": {
-        "neos/flow": "~4.0 || dev-master",
+        "neos/flow": "~4.0",
         "graylog2/gelf-php": "~1.5"
     },
     "autoload": {
