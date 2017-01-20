@@ -36,7 +36,7 @@ If you wish to log normal log messages to your Graylog server just use the provi
 
 ```yaml
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 class SomeClass 
 {

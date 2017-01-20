@@ -1,7 +1,7 @@
 {
     "name": "yeebase/graylog",
     "type": "neos-package",
-    "description": "Graylog exception handler for TYPO3 Flow/Neos Flow",
+    "description": "Graylog exception handler for Neos Flow",
     "license": "MIT",
     "require": {
         "neos/flow": "~4.0 || dev-master",
