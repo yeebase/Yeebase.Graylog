@@ -6,6 +6,7 @@ namespace Yeebase\Graylog\Error;
  *                                                                        *
  *                                                                        */
 
+use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Error\ProductionExceptionHandler;
 use Yeebase\Graylog\GraylogService;
 
@@ -16,6 +17,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
 {
 
     /**
+     * @Flow\Inject
      * @var GraylogService
      */
     protected $graylogService;
