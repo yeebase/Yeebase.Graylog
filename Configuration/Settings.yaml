@@ -11,7 +11,8 @@ Yeebase:
       backend: Yeebase\Graylog\Log\Backend\GraylogBackend
       backendOptions:
         severityThreshold: '%LOG_INFO%'
-        logIpAddress: TRUE
+        logIpAddress: true
+        alsoLogWithSystemLogger: false
 
 ## Optional: Register GraylogExceptionHandler
 #Neos:
