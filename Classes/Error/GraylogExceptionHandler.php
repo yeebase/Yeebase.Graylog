@@ -28,10 +28,15 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
      */
     protected function echoExceptionWeb($exception)
     {
+
         if ($this->graylogService === null) {
             $this->graylogService = new GraylogService();
         }
-        $this->graylogService->logException($exception);
+
+        if (isset($this->renderingOptions['logException']) && $this->renderingOptions['logException']) {
+            $this->graylogService->logException($exception);
+        }
+
         parent::echoExceptionWeb($exception);
     }
 
@@ -44,7 +49,11 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
         if ($this->graylogService === null) {
             $this->graylogService = new GraylogService();
         }
-        $this->graylogService->logException($exception);
+
+        if (isset($this->renderingOptions['logException']) && $this->renderingOptions['logException']) {
+            $this->graylogService->logException($exception);
+        }
+
         parent::echoExceptionCli($exception);
     }
 }
