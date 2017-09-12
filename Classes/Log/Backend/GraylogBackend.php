@@ -56,7 +56,11 @@ class GraylogBackend extends AbstractBackend
         !is_null($additionalData) ? $messageContext['additionalData'] = $additionalData : '';
         !is_null($ipAddress) ? $messageContext['ipAddress'] = $ipAddress : '';
         !is_null($severityLabel) ? $messageContext['severityLabel'] = $severityLabel : '';
-
+        
+        if (!$this->graylogService instanceof  GraylogService) {
+            $this->graylogService = new GraylogService();
+        }
+        
         $this->graylogService->logMessage($output, $messageContext, $severity);
     }
 
