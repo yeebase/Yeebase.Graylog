@@ -8,6 +8,7 @@ namespace Yeebase\Graylog\Log\Backend;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Log\Backend\AbstractBackend;
+use Neos\Flow\ObjectManagement\DependencyInjection\DependencyProxy;
 use Yeebase\Graylog\GraylogService;
 
 /**
@@ -31,12 +32,13 @@ class GraylogBackend extends AbstractBackend
     /**
      * This method will send a message to our graylog service
      *
-     * @param string $message
-     * @param int $severity
-     * @param null $additionalData
-     * @param null $packageKey
-     * @param null $className
-     * @param null $methodName
+     * @param string $message The message to log
+     * @param integer $severity One of the LOG_* constants
+     * @param mixed $additionalData A variable containing more information about the event to be logged
+     * @param string $packageKey Key of the package triggering the log (determined automatically if not specified)
+     * @param string $className Name of the class triggering the log (determined automatically if not specified)
+     * @param string $methodName Name of the method triggering the log (determined automatically if not specified)
+     * @return void
      */
     public function append($message, $severity = LOG_INFO, $additionalData = null, $packageKey = null, $className = null, $methodName = null)
     {
@@ -49,21 +51,22 @@ class GraylogBackend extends AbstractBackend
 
         $output = $severityLabel . ': ' . $message;
 
-        $messageContext = [];
-        !is_null($packageKey) ? $messageContext['packageKey'] = $packageKey : '';
-        !is_null($className) ? $messageContext['className'] = $className : '';
-        !is_null($methodName) ? $messageContext['methodName'] = $methodName : '';
-        !is_null($additionalData) ? $messageContext['additionalData'] = $additionalData : '';
-        !is_null($ipAddress) ? $messageContext['ipAddress'] = $ipAddress : '';
-        !is_null($severityLabel) ? $messageContext['severityLabel'] = $severityLabel : '';
-        
-        if (!$this->graylogService instanceof  GraylogService) {
-            $this->graylogService = new GraylogService();
-        }
-        
-        $this->graylogService->logMessage($output, $messageContext, $severity);
+        $messageContext = [
+            'packageKey' => !is_null($packageKey) ? $packageKey : '',
+            'className' => !is_null($className) ? $className : '',
+            'methodName' => !is_null($methodName) ? $methodName : '',
+            'additionalData' => !is_null($additionalData) ? $additionalData : '',
+            'ipAddress' => !is_null($ipAddress) ? $ipAddress : '',
+            'severityLabel' => !is_null($severityLabel) ? $severityLabel : '',
+        ];
+        $this->getGraylogService()->logMessage($output, $messageContext, $severity);
     }
 
+    /**
+     * Called when this backend is added to a logger
+     *
+     * @return void
+     */
     public function open()
     {
         $this->severityLabels = [
@@ -78,7 +81,30 @@ class GraylogBackend extends AbstractBackend
         ];
     }
 
+    /**
+     * Called when this backend is removed from a logger
+     *
+     * @return void
+     */
     public function close()
     {
+        // nothing to do here
+    }
+
+    /**
+     * Returns an instance of the injected GraylogService (including a fallback to a manually instantiated instance
+     * if Dependency Injection is not (yet) available)
+     *
+     * @return GraylogService
+     */
+    private function getGraylogService()
+    {
+        if ($this->graylogService instanceof GraylogService) {
+            return $this->graylogService;
+        } elseif ($this->graylogService instanceof DependencyProxy) {
+            return $this->graylogService->_activateDependency();
+        } else {
+            return new GraylogService();
+        }
     }
 }
