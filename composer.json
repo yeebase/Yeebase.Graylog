@@ -5,7 +5,6 @@
   "license": "MIT",
   "require": {
     "neos/flow": "4.x",
-    "neos/party": "4.x",
     "graylog2/gelf-php": "~1.5"
   },
   "autoload": {
