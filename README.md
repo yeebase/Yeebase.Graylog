@@ -89,3 +89,14 @@ class SomeClass
 }
 
 ```
+
+By default messages will also be logged to the `SystemLoggerInterface` when Flow runs in `Development` context. You
+can enable or disable this function with a setting:
+
+```yaml
+Yeebase:
+  Graylog:
+    Logger:
+      backendOptions:
+        alsoLogWithSystemLogger: true
+```

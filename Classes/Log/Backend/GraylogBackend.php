@@ -8,6 +8,7 @@ namespace Yeebase\Graylog\Log\Backend;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Log\Backend\AbstractBackend;
+use Neos\Flow\Log\SystemLoggerInterface;
 use Neos\Flow\ObjectManagement\DependencyInjection\DependencyProxy;
 use Yeebase\Graylog\GraylogService;
 
@@ -24,10 +25,21 @@ class GraylogBackend extends AbstractBackend
     protected $graylogService;
 
     /**
+     * @Flow\Inject
+     * @var SystemLoggerInterface
+     */
+    protected $systemLogger;
+
+    /**
      * An array of severity labels, indexed by their integer constant
      * @var array
      */
     protected $severityLabels;
+
+    /**
+     * @var bool
+     */
+    protected $alsoLogWithSystemLogger;
 
     /**
      * This method will send a message to our graylog service
@@ -60,6 +72,10 @@ class GraylogBackend extends AbstractBackend
             'severityLabel' => !is_null($severityLabel) ? $severityLabel : '',
         ];
         $this->getGraylogService()->logMessage($output, $messageContext, $severity);
+      
+              if ($this->alsoLogWithSystemLogger) {
+            $this->systemLogger->log($output, $severity, $additionalData, $packageKey, $className, $methodName);
+        }
     }
 
     /**
@@ -106,5 +122,13 @@ class GraylogBackend extends AbstractBackend
         } else {
             return new GraylogService();
         }
+    }
+
+    /**
+     * @param bool $alsoLogWithSystemLogger
+     */
+    public function setAlsoLogWithSystemLogger(bool $alsoLogWithSystemLogger)
+    {
+        $this->alsoLogWithSystemLogger = $alsoLogWithSystemLogger;
     }
 }
