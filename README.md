@@ -23,6 +23,24 @@ Yeebase:
     chunksize: 'wan'
 ```
 
+### Logging backend
+
+To configure GraylogBackend as the default logging backend, put this in your Settings.yaml:
+
+```
+Neos:
+  Flow:
+    log:
+      systemLogger:
+        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+      securityLogger:
+        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+      sqlLogger:
+        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+      i18nLogger:
+        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+```
+
 ### Log exceptions
 
 Activate the exception handler and configure the connection to your graylog server in your Settings.yaml:
