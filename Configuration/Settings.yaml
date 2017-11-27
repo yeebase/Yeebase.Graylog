@@ -14,6 +14,20 @@ Yeebase:
         logIpAddress: true
         alsoLogWithSystemLogger: false
 
+## Optional: Register GraylogBackend
+#Neos:
+#  Flow:
+#    log:
+#      systemLogger:
+#        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+#      securityLogger:
+#        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+#      sqlLogger:
+#        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+#      i18nLogger:
+#        backend: Yeebase\Graylog\Log\Backend\GraylogBackend
+
+
 ## Optional: Register GraylogExceptionHandler
 #Neos:
 #  Flow:
