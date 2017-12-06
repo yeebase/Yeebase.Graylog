@@ -43,6 +43,7 @@ Neos:
 
 ### Log exceptions
 
+
 Activate the exception handler and configure the connection to your graylog server in your Settings.yaml:
 
 ```yaml
@@ -52,9 +53,23 @@ Neos:
       exceptionHandler:
         className: 'Yeebase\Graylog\Error\GraylogExceptionHandler'
 ```
+Now all Exceptions that are shown to the Web or CLI are logged to graylog.
 
 *Note:* For `Development` context, the `Neos.Flow` package overrides this setting. Make sure to add this configuration
 in the right context Settings.yaml.
+
+If you want to log additionally *all* Exceptions to graylog you should replace the systemLogger as well. This will 
+log all errors that are logged with the SystemLogger to Graylog as well to the disk. By default Flow will only log
+a single line to the system log aka "See also ... .txt". The GraylogLogger will also log the full Exception.
+
+```yaml
+Neos:
+  Flow:
+    log:
+      systemLogger:
+        logger: Yeebase\Graylog\Log\GraylogLogger
+```
+
 
 #### Filter exceptions
 

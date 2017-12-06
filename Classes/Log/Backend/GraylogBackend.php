@@ -73,7 +73,7 @@ class GraylogBackend extends AbstractBackend
         ];
         $this->getGraylogService()->logMessage($output, $messageContext, $severity);
       
-              if ($this->alsoLogWithSystemLogger) {
+        if ($this->alsoLogWithSystemLogger && $this->systemLogger instanceof SystemLoggerInterface) {
             $this->systemLogger->log($output, $severity, $additionalData, $packageKey, $className, $methodName);
         }
     }
