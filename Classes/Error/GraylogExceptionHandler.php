@@ -29,7 +29,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
     protected $graylogService;
 
     /**
-     * @param \Exception|\Throwable $exception
+     * @param \Throwable $exception
      * @return void
      */
     protected function echoExceptionWeb($exception)
@@ -45,7 +45,7 @@ class GraylogExceptionHandler extends ProductionExceptionHandler
      * @param \Exception|\Throwable $exception The exception
      * @return void
      */
-    protected function echoExceptionCli($exception)
+    protected function echoExceptionCli(\Throwable $exception)
     {
         if (isset($this->renderingOptions['logException']) && $this->renderingOptions['logException']) {
             $this->getGraylogService()->logException($exception);
