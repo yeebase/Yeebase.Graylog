@@ -33,7 +33,13 @@ class GraylogLogger extends Logger
     public function logError($error, array $additionalData = [])
     {
         $this->getGraylogService()->logException($error);
-        parent::logError($error, $additionalData);
+
+        // As `logException()` is now deprecated we still support it for now but prefer `logThrowable()`
+        if ($error instanceof \Throwable) {
+            parent::logThrowable($error);
+        } else {
+            parent::logException($error);
+        }
     }
 
     /**
