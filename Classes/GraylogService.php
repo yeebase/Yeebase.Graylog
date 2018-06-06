@@ -71,7 +71,7 @@ class GraylogService
      */
     public function logException($exception)
     {
-        $statusCode = null;
+        $statusCode = '';
         if ($exception instanceof FlowException) {
             $statusCode = $exception->getStatusCode();
         }
@@ -91,8 +91,8 @@ class GraylogService
         $messageContext = array(
             'exception' => $exception,
             'reference_code' => $exception instanceof FlowException ? $exception->getReferenceCode() : null,
-            'response_status' => $statusCode,
-            'short_message' => sprintf('%d %s', $statusCode, Response::getStatusMessageByCode($statusCode)),
+            'response_status_code' => $statusCode,
+            'response_status_message' => sprintf('%d %s', $statusCode, Response::getStatusMessageByCode($statusCode)),
             'code' => $exception->getCode(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine()
@@ -151,6 +151,12 @@ class GraylogService
     {
         if (!isset($this->settings['host']) || strlen($this->settings['host']) === 0) {
             return;
+        }
+
+        // Extend the message context with configured values from Settings.yaml
+        if (array_key_exists('messageContext', $this->settings)) {
+            $additionalMessageContext = $this->settings['messageContext'];
+            $messageContext = array_merge($messageContext, $additionalMessageContext);
         }
 
         $host = $this->settings['host'];

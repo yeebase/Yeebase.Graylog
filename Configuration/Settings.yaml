@@ -14,6 +14,11 @@ Yeebase:
         logIpAddress: true
         alsoLogWithSystemLogger: false
 
+## Optional: Extend your message context with this configuration to pass some static fields.
+## Useful to distinguish between live and stage for instance
+#    messageContext:
+#      app_context: 'stage'
+
 ## Optional: Register GraylogBackend
 #Neos:
 #  Flow:
