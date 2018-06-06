@@ -133,3 +133,17 @@ Yeebase:
       backendOptions:
         alsoLogWithSystemLogger: true
 ```
+
+
+### Extend the message context
+By default this package will send a bunch of values to graylog you can use to filter on. A Exception for instance has
+some fields like `reference_code`, `response_status_code` and so on.
+You can extend those values via Settings.yaml. Just pass an array of values to `Yeebase.Graylog.messageContext`.
+This is useful to pass some static values to your logs to filter on in Graylog.
+
+```yaml
+Yeebase:
+  Graylog:
+    messageContext:
+      app_context: 'stage'
+```
