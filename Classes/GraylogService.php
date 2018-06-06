@@ -153,6 +153,12 @@ class GraylogService
             return;
         }
 
+        // Extend the message context with configured values from Settings.yaml
+        if (array_key_exists('messageContext', $this->settings)) {
+            $additionalMessageContext = $this->settings['messageContext'];
+            $messageContext = array_merge($messageContext, $additionalMessageContext);
+        }
+
         $host = $this->settings['host'];
         $port = isset($this->settings['port']) ? $this->settings['port'] : UdpTransport::DEFAULT_PORT;
 
